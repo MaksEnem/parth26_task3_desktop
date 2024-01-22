@@ -17,7 +17,7 @@ class Windows
 private:
 	int columnsWindow;
 	int linesWindow;
-	int initialCoordinates[2];
+	int initialCoordinates[2] = { 0, 0 };
 
 public:
 
@@ -48,7 +48,33 @@ public:
 		std::cout << "Coordinates of the upper left corner of the window: " << coordinateX << " " << coordinateY << std::endl;
 	};
 
-	
+	void SetResize(Monitor screenSettings)
+	{
+
+		do 
+		{
+
+			std::cout << "Window width cannot be larger " << screenSettings.abscissa - initialCoordinates[0] << std::endl;
+			std::cout << "Enter window width: ";
+			std::cin >> coordinateX;
+			columnsWindow = coordinateX;
+
+		} while ((columnsWindow < 0) || (columnsWindow > (screenSettings.abscissa - initialCoordinates[0])));
+
+		do
+		{
+
+			std::cout << "The height of the window cannot be greater " << screenSettings.ordinate - initialCoordinates[1] << std::endl;
+			std::cout << "Enter window height: ";
+			std::cin >> coordinateY;
+			linesWindow = coordinateY;
+
+		} while ((linesWindow < 0) || (linesWindow > (screenSettings.ordinate - initialCoordinates[1])));
+		
+		std::cout << "The window width is: " << columnsWindow << std::endl;
+		std::cout << "The window height is: " << linesWindow << std::endl;
+
+	}
 
 };
 
@@ -83,7 +109,7 @@ int main()
 		else if (command == "resize")
 		{
 
-			std::cout << "resize" << std::endl;
+			windowSettings.SetResize(monitorSettings);
 
 		}
 		else if(command == "display")
