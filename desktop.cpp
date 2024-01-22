@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 class Monitor
 {
@@ -76,20 +77,51 @@ public:
 
 	}
 
+	void PrintDisplay(Monitor screenSettings)
+	{
+
+
+		for (int i = 0; i < 50; ++i)
+		{
+			for (int j = 0; j < 80; ++j) {
+
+				if ((initialCoordinates[0] <= j && initialCoordinates[1] <= i) && (j <= (initialCoordinates[0] + columnsWindow)) && (i <= initialCoordinates[1] + linesWindow))
+				{
+
+					std::cout << "1" << " ";
+
+				}
+				else
+				{
+
+					std::cout << "O" << " ";
+
+				}
+
+				/*if (columnsWindow == j && linesWindow == i)
+				{
+
+					std::cout << "1" << " ";
+
+				}
+				else
+				{
+
+					std::cout << "O" << " ";
+
+				}*/
+
+
+
+			}
+			std::cout << std::endl;
+		}
+	}
+
 };
 
 int main() 
 {
-
-	/*for (int i = 0; i < 50; ++i) {
-		for (int j = 0; j < 80; ++j) {
-
-			std::cout << j << " ";
-
-		}
-
-		std::cout << std::endl;
-	}*/
 
 	Windows windowSettings;
 	Monitor monitorSettings;
@@ -97,9 +129,9 @@ int main()
 	std::string command;
 
 	do {
-		std::cout << "Enter command: ";
+		std::cout << "Enter command: ";		
 		std::cin >> command;
-
+		//command = "display";
 		if (command == "move")
 		{
 
@@ -115,7 +147,7 @@ int main()
 		else if(command == "display")
 		{
 
-			std::cout << "display" << std::endl;
+			windowSettings.PrintDisplay(monitorSettings);
 
 		}
 
